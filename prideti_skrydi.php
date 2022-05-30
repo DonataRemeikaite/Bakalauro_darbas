@@ -23,9 +23,7 @@ if ($conn->query($sql) === TRUE) {
 $targetDir = "./uploads/"; 
 $target_filename = basename($_FILES["files"]["name"]);
 
-$target_file = $target_dir . basename($_FILES["files"]["name"]);
-
-$target_file = $targetDir.$target_file ;
+$target_file = $targetDir.$target_filename ;
 
 if(isset($_FILES['files'])){ 
     
@@ -73,7 +71,9 @@ if(isset($_FILES['files'])){
 		<input type="number" step="0.01" class="form-control mb-3" placeholder="Išvykimo kaina" min="0" name="isvykimo_kaina"/>
 
 		<input type="number" step="0.01" class="form-control mb-3" placeholder="Grįžimo kaina" min="0" name="grizimo_kaina"/>
-        <input type="file"  class="form-control mb-3" placeholder="Nuotraukos" id="files" name="files">
+       
+		<input type="file"  class="form-control mb-3" placeholder="Nuotraukos" id="files" name="files">
+		
 		<div class="col d-flex justify-content-end">
 			<button class="btn btn-outline-secondary" type='submit'> Pridėti </button>
 		</div>

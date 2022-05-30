@@ -53,7 +53,6 @@ $viesbuciai = $conn->query($sql);
 			<table>
 			<tr>
 				<th>Pavadinimas</th>
-				<th>Kryptis iš</th>
 				<th>Kryptis į</th>
 				<th>Atvykimo data</th>
 				<th>Išvykimo data</th>
@@ -71,7 +70,6 @@ $viesbuciai = $conn->query($sql);
 				echo "  <tr>
 				
 							<td>".$row['pavadinimas']."</td>
-							<td>".$row['kryptis_is']."</td>
 							<td>".$row['kryptis_i']."</td>
 							<td>".$row['atvykimo_data']."</td>
 							<td>".$row['isvykimo_data']."</td>
@@ -83,8 +81,7 @@ $viesbuciai = $conn->query($sql);
 							<td>".$row['aprasymas']."</td>
 							<td> 
 								<form action='redaguoti_viesbuti.php' method='post'>
-									<input hidden name='pavadinimas' value='".$row['pavadinimas']."'/> 
-									<input hidden name='kryptis_is' value='".$row['kryptis_is']."'/>
+									<input hidden name='pavadinimas' value='".$row['pavadinimas']."'/>
 									<input hidden name='kryptis_i' value='".$row['kryptis_i']."'/>
 									<input hidden name='atvykimo_data' value='".$row['atvykimo_data']."'/>
 									<input hidden name='isvykimo_data' value='".$row['isvykimo_data']."'/>

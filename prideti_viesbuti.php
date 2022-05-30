@@ -2,7 +2,6 @@
 require_once 'sesija.php';
 
 $pavadinimas = $_POST['pavadinimas'];
-$kryptis_is = $_POST['kryptis_is'];
 $kryptis_i = $_POST['kryptis_i'];
 $atvykimo_data_nepakeista = $_POST['atvykimo_data'];
 $isvykimo_data_nepakeista = $_POST['isvykimo_data'];
@@ -17,8 +16,8 @@ $aprasymas = $_POST['aprasymas'];
 $nuotraukos = $_POST['files'];
  
 
-	$sql = "INSERT INTO viesbuciai (pavadinimas, kryptis_is, kryptis_i, atvykimo_data, isvykimo_data, zvaigzdutes, maitinimas, vieta, tema, kaina, aprasymas)
-VALUES ('$pavadinimas', '$kryptis_is','$kryptis_i','$atvykimo_data','$isvykimo_data','$zvaigzdutes','$maitinimas','$vieta','$tema','$kaina','$aprasymas')";
+	$sql = "INSERT INTO viesbuciai (pavadinimas, kryptis_i, atvykimo_data, isvykimo_data, zvaigzdutes, maitinimas, vieta, tema, kaina, aprasymas)
+VALUES ('$pavadinimas','$kryptis_i','$atvykimo_data','$isvykimo_data','$zvaigzdutes','$maitinimas','$vieta','$tema','$kaina','$aprasymas')";
 
 if ($conn->query($sql) === TRUE) {
   $last_id = $conn->insert_id;
@@ -27,60 +26,54 @@ if ($conn->query($sql) === TRUE) {
 //NUOTRAUKOS				nuotraukų įkėlimo į duomenų bazę kodo fragmentas pasisikolintas iš: https://www.codexworld.com/upload-multiple-images-store-in-database-php-mysql/
 if(isset($_FILES['files'])){ 
    
-
-    $targetDir = "./uploads/"; 
-    $allowTypes = array('jpg','png','jpeg','gif'); 
+    $Failu_aplankalas = "./uploads/"; 
+    $duomenu_tipai = array('jpg','png','jpeg','gif'); 
      
-    $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = ''; 
-    $fileNames = array_filter($_FILES['files']['name']); 
-    if(!empty($fileNames)){ 
+    $klaidos = $pranesimas = $reiksmiu_sql = $ikelimo_klaida = $tipo_klaida = ''; 
+    $failu_pavadinimai = array_filter($_FILES['files']['name']); 
+	
+    if(!empty($failu_pavadinimai)){ 
         foreach($_FILES['files']['name'] as $key=>$val){ 
-            // File upload path 
-            $fileName = basename($_FILES['files']['name'][$key]); 
-            $targetFilePath = $targetDir . $fileName; 
+            // failo ikelimo kelias
+            $failo_pavadinimas = basename($_FILES['files']['name'][$key]); 
+            $failo_kelias = $Failu_aplankalas . $failo_pavadinimas; 
              
-            // Check whether file type is valid 
-            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION); 
-            if(in_array($fileType, $allowTypes)){ 
-                // Upload file to server 
-                if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $targetFilePath)){ 
-                    // Image db insert sql 
-                    $insertValuesSQL .= "(  $last_id,'".$fileName."'),"; 
+            // failo tipo atitikimas
+            $failo_tipas = pathinfo($failo_kelias, PATHINFO_EXTENSION); 
+            if(in_array($failo_tipas, $duomenu_tipai)){ 
+                // issaugoti faila aplankale
+                if(move_uploaded_file($_FILES["files"]["tmp_name"][$key], $failo_kelias)){ 
+				
+                    // papildyti reiksmiu sql viesbucio id ir failo pavadinimu
+                    $reiksmiu_sql .= "(  $last_id,'".$failo_pavadinimas."'),"; 
                     
                 }else{ 
-                    $errorUpload .= $_FILES['files']['name'][$key].' | '; 
+                    $ikelimo_klaida .= $_FILES['files']['name'][$key].' | '; 
                 } 
             }else{ 
-                $errorUploadType .= $_FILES['files']['name'][$key].' | '; 
+                $tipo_klaida .= $_FILES['files']['name'][$key].' | '; 
             } 
         } 
          
-        // Error message 
-        $errorUpload = !empty($errorUpload)?'Upload Error: '.trim($errorUpload, ' | '):''; 
-        $errorUploadType = !empty($errorUploadType)?'File Type Error: '.trim($errorUploadType, ' | '):''; 
-        $errorMsg = !empty($errorUpload)?'<br/>'.$errorUpload.'<br/>'.$errorUploadType:'<br/>'.$errorUploadType; 
+        // Klaidu pranesimai
+        $ikelimo_klaida = !empty($ikelimo_klaida)?'Upload Error: '.trim($ikelimo_klaida, ' | '):''; 
+        $tipo_klaida = !empty($tipo_klaida)?'File Type Error: '.trim($tipo_klaida, ' | '):''; 
+        $pranesimas = !empty($ikelimo_klaida)?'<br/>'.$ikelimo_klaida.'<br/>'.$tipo_klaida:'<br/>'.$tipo_klaida; 
        
-        if(!empty($insertValuesSQL)){ 
+        if(!empty($reiksmiu_sql)){ 
             
-
-            $insertValuesSQL = trim($insertValuesSQL, ','); 
-            // Insert image file name into database 
-            print_r($insertValuesSQL);
-            $sql = "INSERT INTO nuotraukos (viesbucio_id, nuotraukos_url) VALUES $insertValuesSQL";
+            $reiksmiu_sql = trim($reiksmiu_sql, ','); 
+            // ideti viesbucio id ir nuotrauku pavadinimus i nuotrauku lentele
+            
+            $sql = "INSERT INTO nuotraukos (viesbucio_id, nuotraukos_url) VALUES $reiksmiu_sql";
         
-
             $insert = $conn->query($sql); 
            
-            if($insert){ 
-                $statusMsg = "Files are uploaded successfully.".$errorMsg; 
-            }else{ 
-                $statusMsg = "Sorry, there was an error uploading your file."; 
-            } 
         }else{ 
-            $statusMsg = "Upload failed! ".$errorMsg; 
+            $klaidos = "Įkėlimas nepavyko: ".$pranesimas; 
         } 
     }else{ 
-        $statusMsg = 'Please select a file to upload.'; 
+        $klaidos = 'Pasirinkti failus.'; 
     } 
    
 } 
@@ -109,8 +102,6 @@ if(isset($_FILES['files'])){
 	
 		
 		<input type="text" class="form-control mb-3" placeholder="Pavadinimas" name="pavadinimas"/>
-		
-		<input type="text" class="form-control mb-3" placeholder="Kryptis iš" name="kryptis_is"/>
 		
 		<input type="text" class="form-control mb-3" placeholder="Kryptis į" name="kryptis_i"/>
 		

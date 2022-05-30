@@ -16,7 +16,7 @@ $tema = $_POST['tema'];
 $kaina = $_POST['kaina'];
 $aprasymas = $_POST['aprasymas'];
 
-$sql = "UPDATE viesbuciai SET pavadinimas = '".$pavadinimas."', kryptis_is = '".$kryptis_is."', kryptis_i = '".$kryptis_i."', atvykimo_data = '".$atvykimo_data."', isvykimo_data = '".$isvykimo_data."', zvaigzdutes = '".$zvaigzdutes."' ,maitinimas = '".$maitinimas."',vieta ='".$vieta."',tema ='".$tema."',kaina ='".$kaina."' ,aprasymas = '".$aprasymas."'
+$sql = "UPDATE viesbuciai SET pavadinimas = '".$pavadinimas."', kryptis_i = '".$kryptis_i."', atvykimo_data = '".$atvykimo_data."', isvykimo_data = '".$isvykimo_data."', zvaigzdutes = '".$zvaigzdutes."' ,maitinimas = '".$maitinimas."',vieta ='".$vieta."',tema ='".$tema."',kaina ='".$kaina."' ,aprasymas = '".$aprasymas."'
 WHERE viesbucioid = '".$id."'";
 
 if ($conn->query($sql) === TRUE) {
@@ -50,8 +50,6 @@ if ($conn->query($sql) === TRUE) {
 		<?php echo '<input hidden name="viesbucioid" value="'.$id.'"/>  '; ?>
 		
 		<?php echo '<input value="'.$pavadinimas.'" type="text" class="form-control mb-3" placeholder="Pavadinimas" name="pavadinimas"/>';  ?> 
-		
-		<?php echo '<input value="'.$kryptis_is.'" type="text" class="form-control mb-3" placeholder="Kryptis iš" name="kryptis_is"/>';  ?> 
 		
 		<?php echo '<input value="'.$kryptis_i.'" type="text" class="form-control mb-3" placeholder="Kryptis į" name="kryptis_i"/>'; ?>
 		

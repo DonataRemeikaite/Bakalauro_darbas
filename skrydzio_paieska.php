@@ -75,7 +75,7 @@ if($skrydziu_kopija->num_rows > 0){
 }
 
 ?>
-console.log(data);
+
 
 addData(data)
 

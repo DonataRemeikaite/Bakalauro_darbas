@@ -67,7 +67,7 @@ $galutine_kaina=$galutine_skrydzio_kaina+$galutine_viesbucio_kaina+$bendra_pasla
   <div class="container-fluid fonas mb-2 pb-5 pt-5">   <!-- Logotipas -->
 	<div class="row pt-5 pb-5 mt-2 mb-2">
 		<div class="col text-white fst-italic d-flex justify-content-center">
-			<a href="https://if180029.mokslas.vdu.lt" class="text-decoration-none text-dark"><h1>-- Apmokėjimas --</h1></a>
+			<a href="https://if180029.mokslas.vdu.lt" class="text-decoration-none text-white"><h1>-- Apmokėjimas --</h1></a>
 		</div>
 	</div>
   </div>
@@ -76,7 +76,7 @@ $galutine_kaina=$galutine_skrydzio_kaina+$galutine_viesbucio_kaina+$bendra_pasla
 	<main class="container border border-3 rounded mt-3 col-md-4 col-10">
 		
 		<img src="https://40den.eu/user_files/Men_juht/Pangad_LT.png" class="img-fluid" alt="Responsive image">
-		<?php echo'<h5 class="row fst-italic d-flex justify-content-center pt-3">Suma: '.$galutine_kaina.'</h5> ';?>
+		<?php echo'<h3 class="row fst-italic d-flex justify-content-center pt-3">Suma: '.$galutine_kaina.'</h3> ';?>
 		<form action="ivykdymas.php" method="post">
             <?php
 				echo '

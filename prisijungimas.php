@@ -14,7 +14,7 @@
 	<div class="container-fluid fonas mb-3 pb-5 pt-5">   <!-- Logotipas -->
 		<div class="row pt-5 pb-5 mt-2 mb-2">
 			<div class="col text-white fst-italic d-flex justify-content-center">
-				<a href="https://if180029.mokslas.vdu.lt" class="text-decoration-none text-dark"><h1>-- Dive In Exploring --</h1></a>
+				<a href="https://if180029.mokslas.vdu.lt" class="text-decoration-none text-white"><h1>-- Dive In Exploring --</h1></a>
 			</div>
 		</div>
 	</div>

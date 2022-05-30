@@ -234,4 +234,4 @@ INSERT INTO `viesbuciai` (`viesbucioid`, `pavadinimas`, `kryptis_i`, `atvykimo_d
 (24,	'Semoris',	'Turkija',	'2022-06-07 00:00:00',	'2022-06-14 00:00:00',	3,	'Pusryčiai',	'Ant jūros kranto',	'Poroms',	107,	'Viešbutis „SEMORIS HOTEL“ yra už 65 km nuo Antalijos oro uosto ir 2,5 km nuo Manavgato. Atstumas iki paplūdimio yra 850 m. Gultai ir skėčiai paplūdimyje yra nemokami. Viešbutyje yra kambariai su dviaukštėmis lovomis. Tinka šeimoms su vaikais ir jaunoms grupėms. Viešbutyje yra baseinas su čiuožykla, taip pat yra vaikų baseinas ir čiuožykla.'),
 (25,	'Meltem',	'Turkija',	'2022-06-07 00:00:00',	'2022-06-14 00:00:00',	1,	'Pusryčiai',	'Miesto centre',	'Verslas',	55,	'Ekonomiškas miesto tipo viešbutis turintis nedidelę teritoriją. Rekomenduojamas ekonominio tipo poilsiui ir tiems, kas nori gyventi arčiau Antalijos centro.');
 
--- 2022-05-24 17:07:22
+-- 2022-05-30 18:48:42

@@ -251,7 +251,7 @@ $grizimo_data = explode(" ",$grizimo_data)[0];
             <form action = "" method="POST">
                 <?php
                     echo'
-						
+						<input type="hidden" name="skrydzio_id" value="'.$skrydzio_id.'">
                         <input type="hidden" name="kryptis_i" value="'.$kryptis_i.'">
                         <input type="hidden" name="keleiviu_skaicius" value="'.$keleiviu_skaicius.'">
                         <input type="hidden" name="isvykimo_data" value="'.$isvykimo_data.'">
